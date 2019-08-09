@@ -19,6 +19,7 @@ var root = <App
       footer={<OverflowToolbar><Input placeholder="To Do" /></OverflowToolbar>}
     >
       <List
+        noDataText="No thing to do."
         items={[
           <CustomListItem>
             <HBox
