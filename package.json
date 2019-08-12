@@ -16,7 +16,9 @@
     "lint:fix": "node_modules/.bin/eslint --fix \"src/**/*.js\""
   },
   "dependencies": {
-    "lodash": "^4"
+    "lodash": "^4.17.15",
+    "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@types/openui5": "^1.40.2",

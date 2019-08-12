@@ -1,9 +1,12 @@
 {
     "eslint.autoFixOnSave": true,
-    "editor.formatOnSave": false,
+    "editor.formatOnSave": true,
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
     "editor.wordWrap": "on",
     "files.eol": "\n",
-    "javascript.validate.enable": false
+    "javascript.validate.enable": false,
+    "cSpell.words": [
+        "devtools"
+    ]
 }
