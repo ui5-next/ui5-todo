@@ -1,7 +1,7 @@
 {
   "app": {
     "namespace": "ui5.todo",
-    "resource": "https://openui5-mirror-cd-1251425453.file.myqcloud.com/openui5-sdk-1.68.1/resources/"
+    "resource": "https://openui5.hana.ondemand.com/1.68.1/resources/"
   },
   "name": "ui5-todo",
   "version": "1.0.0",
