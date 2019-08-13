@@ -12,6 +12,7 @@ const InitState = {
    * only show favorite to-do items indicator
    */
   bShowFavorite: false,
+  bShowFinished: true,
   /**
    * to-do tasks list
    */

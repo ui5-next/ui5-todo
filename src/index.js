@@ -13,6 +13,7 @@ import { GlobalStore } from "./store/Store";
 import Toolbar from "sap/m/Toolbar";
 import ToolbarSpacer from "sap/m/ToolbarSpacer";
 import Title from "sap/m/Title";
+import OverflowToolbar from "sap/m/OverflowToolbar";
 
 GlobalStore.addReducer("Action.AddNewToDo", oState => {
   // add state to value
@@ -43,23 +44,24 @@ const actionAddNewToDo = () => GlobalStore.dispatchAction("Action.AddNewToDo");
 
 const actionToggleItemFavorite = (iIndex) => GlobalStore.dispatchAction("Action.ToggleItemFavorite", iIndex);
 
-const actionToggleShowFavorite = () => GlobalStore.dispatchAction("Action.ToggleShowFavorite");
 
-var root: App = <App
+var app: App = <App
   pages={
     <Page
       customHeader={
-        <Toolbar>
+        <OverflowToolbar>
           <Button icon="sap-icon://sap-ui5" enabled={false} type={ButtonType.Transparent} />
+          <Title >UI5 To Do List Application</Title>
           <ToolbarSpacer />
-          <Title>UI5 To Do List Application</Title>
-          <ToolbarSpacer />
-          <Button
-            type={ButtonType.Transparent}
-            icon={{ path: "/bShowFavorite", formatter: v => v ? "sap-icon://favorite" : "sap-icon://unfavorite" }}
-            press={actionToggleShowFavorite}
+          <CheckBox
+            text="Show Finished"
+            selected="{/bShowFinished}"
           />
-        </Toolbar>
+          <CheckBox
+            text="Favorite Only"
+            selected="{/bShowFavorite}"
+          />
+        </OverflowToolbar>
       }
       floatingFooter={true}
       // for chinese input, it will cause some errors.
@@ -76,14 +78,14 @@ var root: App = <App
           path: "/ToDoList",
           template: (
             <CustomListItem visible={{
-              parts: [{ path: "bFavorite" }, { path: "/bShowFavorite" }],
-              formatter: (v1, v2) => {
-                if (v2) {
-                  if (v1) {
-                    return true;
-                  } else {
-                    return false;
-                  }
+              parts: [{ path: "bFavorite" }, { path: "bFinished" }, { path: "/bShowFavorite" }, { path: "/bShowFinished" }],
+              formatter: (bFavorite, bFinished, bShowFavorite, bShowFinished) => {
+                // real complex logic
+                if (!bShowFinished && bFinished) {
+                  return false;
+                }
+                if (bShowFavorite && !bFavorite) {
+                  return false;
                 }
                 return true;
               }
@@ -93,6 +95,7 @@ var root: App = <App
                 items={[
                   <CheckBox selected="{bFinished}" />,
                   <Input
+                    valueLiveUpdate={true}
                     enabled="{= !${bFinished}}"
                     value="{sText}"
                     layoutData={<FlexItemData growFactor={1} />}
@@ -121,4 +124,4 @@ var root: App = <App
   }
 />;
 
-root.setModel(GlobalStore).placeAt("content");
+app.setModel(GlobalStore).placeAt("content");

@@ -3,9 +3,10 @@ import { createStore, applyMiddleware, compose } from "redux";
 import ReduxPropertyBinding from "./ReduxPropertyBinding";
 import Context from "sap/ui/model/Context";
 import ReduxListBinding from "./ReduxListBinding";
-import ReduxTreeBinding from './ReduxTreeBinding';
-import { trimStart, trimEnd } from "lodash";
-import ReduxThunk from 'redux-thunk';
+import ReduxTreeBinding from "./ReduxTreeBinding";
+import ReduxThunk from "redux-thunk";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 import { get } from "./Util";
 
@@ -59,19 +60,26 @@ export default class ReduxModel<T> extends ClientModel {
     };
 
     this._store = createStore(
-      // reducer
-      (oState = initState, oActionData: ActionData) => {
-        const reducer = this.reducers[oActionData.type];
-        if (reducer) {
-          var tmpState = { ...oState };
-          return reducer.perform(tmpState, oActionData.param) || tmpState;
-        } else {
-          return oState;
+      persistReducer(
+        // config
+        { key: "GlobalState", storage },
+        // reducer
+        (oState = initState, oActionData: ActionData) => {
+          const reducer = this.reducers[oActionData.type];
+          if (reducer) {
+            var tmpState = { ...oState };
+            return reducer.perform(tmpState, oActionData.param) || tmpState;
+          } else {
+            return oState;
+          }
         }
-      },
+      )
+      ,
       // with redux devtools browser plugin
       composeEnhancer(applyMiddleware(ReduxThunk))
     );
+
+    persistStore(this._store);
 
     this._store.subscribe(() => {
       // once any data updated, perform check
@@ -83,14 +91,19 @@ export default class ReduxModel<T> extends ClientModel {
   _setPropertyReducer(oState, { sPath = "", oValue, oContext }) {
 
     // maybe need update with general way
-    sPath = trimStart(trimEnd(sPath, "}"), "{");
+
+    if (sPath.startsWith("{") || sPath.endsWith("}")) {
+      throw new Error(`Application data binding error: for ${sPath}, user do not need use {} to wrap the path.`);
+    }
 
     if (oContext) {
 
+      var aPath = oContext.getPath().split("/").filter(v => v).concat(sPath.split("/").filter(v => v));
       // with context, need combine the context path and the input sPath
-      var sProperty = sPath;
-      sPath = oContext.getPath();
-      const oUpdateBase = get(oState, sPath.split("/").filter(v => v)) || {};
+      var sProperty = aPath.pop();
+
+      const oUpdateBase = get(oState, aPath) || {};
+
       oUpdateBase[sProperty] = oValue;
 
     } else {
@@ -154,11 +167,11 @@ export default class ReduxModel<T> extends ClientModel {
 
     var oState = { ...this._store.getState() }; // clone
     var iIndex = 0;
-    var aParts = sPath.split('/');
+    var aParts = sPath.split("/");
 
     if (!aParts[0]) {
       // absolute path starting with slash
-      if (aParts[1] === 'selector') {
+      if (aParts[1] === "selector") {
         oNode = this.oSelectors[aParts[2]](oState, oContext);
         iIndex = 3;
       } else {
@@ -170,7 +183,7 @@ export default class ReduxModel<T> extends ClientModel {
     while (oNode && aParts[iIndex]) {
       var sPart = aParts[iIndex];
       var oTmpNode = oNode[sPart];
-      if (typeof oTmpNode === 'function') {
+      if (typeof oTmpNode === "function") {
         oNode = oTmpNode(oState, oContext);
       } else {
         oNode = oTmpNode;
