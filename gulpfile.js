@@ -19,7 +19,7 @@ var packageJson = require("./package.json");
 
 var SRC_ROOT = "./src";
 var DEST_ROOT = "./dist";
-var APP_NAME = packageJson.name;
+var APP_NAME = packageJson.app.name;
 var namespace = packageJson.app.namespace;
 var resourceRoot = packageJson.app.resource;
 

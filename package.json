@@ -1,5 +1,6 @@
 {
   "app": {
+    "name": "UI5 To Do List",
     "namespace": "ui5.todo",
     "resource": "https://openui5.hana.ondemand.com/1.68.1/resources/"
   },
