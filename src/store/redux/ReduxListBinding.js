@@ -6,6 +6,8 @@ import ChangeReason from "sap/ui/model/ChangeReason";
 export default class ReduxListBinding extends ClientListBinding {
 
   getContexts(iStartIndex, iLength) {
+
+    // enhance here logic to impl the infinite scroll feature
     this.iLastStartIndex = iStartIndex;
     this.iLastLength = iLength;
 
@@ -15,7 +17,9 @@ export default class ReduxListBinding extends ClientListBinding {
     if (!iLength) {
       iLength = Math.min(this.iLength, this.oModel.iSizeLimit);
     }
+
     return this._getContexts(iStartIndex, iLength);
+
   }
 
   getCurrentContexts() {
