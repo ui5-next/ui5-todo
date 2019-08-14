@@ -3,7 +3,7 @@ import ReduxModel from "./redux/ReduxModel";
 /**
  * Application initialize state
  */
-const InitState = {
+const AppInitState = {
   /**
    * tmp string to store new to-do string text
    */
@@ -30,4 +30,4 @@ const InitState = {
   ]
 };
 
-export const GlobalStore = new ReduxModel(InitState);
+export const GlobalStore = new ReduxModel(AppInitState);

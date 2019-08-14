@@ -29,15 +29,18 @@ export interface ActionData {
 
 export type ThunkAction<T> = (dispatch: (action: ActionData | ThunkAction) => void, getState: () => T) => Promise<void>;
 
-/**
- * Redux Model
- */
+
 export default class ReduxModel<T> extends ClientModel {
 
   metadata = {
-    publicMethods: ["registerReducer", "dispatch"]
+    publicMethods: ["addReducer", "dispatch", "dispatchAction"]
   }
 
+  /**
+   * Redux Model, provide transparent redux binding for UI5
+   *
+   * @param {any} initializeState The init state of application
+   */
   constructor(initializeState: T = {}) {
 
     super();
@@ -126,7 +129,7 @@ export default class ReduxModel<T> extends ClientModel {
   /**
    * addReducer function
    *
-   * Register new reducer to global store
+   * register new reducer to global store
    *
    * with function instead of transitional way just for single way dependency
    *

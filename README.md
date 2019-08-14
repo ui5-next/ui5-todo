@@ -1,4 +1,4 @@
-# UI5 ToDo App
+# UI5 To Do App
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/eb74ee43-2b17-43f3-bf78-4b06fdaaf3a0/deploy-status)](https://serene-northcutt-a34cd6.netlify.com/)
 

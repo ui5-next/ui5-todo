@@ -2,7 +2,6 @@ import Input from "sap/m/Input";
 import List from "sap/m/List";
 import CustomListItem from "sap/m/CustomListItem";
 import Page from "sap/m/Page";
-import App from "sap/m/App";
 import CheckBox from "sap/m/CheckBox";
 import HBox from "sap/m/HBox";
 import FlexJustifyContent from "sap/m/FlexJustifyContent";
@@ -14,6 +13,11 @@ import Toolbar from "sap/m/Toolbar";
 import ToolbarSpacer from "sap/m/ToolbarSpacer";
 import Title from "sap/m/Title";
 import OverflowToolbar from "sap/m/OverflowToolbar";
+import SplitApp from "sap/m/SplitApp";
+import Icon from "sap/ui/core/Icon";
+import SelectList from "sap/m/SelectList";
+import Item from "sap/ui/core/Item";
+import ListItem from "sap/ui/core/ListItem";
 
 GlobalStore.addReducer("Action.AddNewToDo", oState => {
   // add state to value
@@ -45,13 +49,35 @@ const actionAddNewToDo = () => GlobalStore.dispatchAction("Action.AddNewToDo");
 const actionToggleItemFavorite = (iIndex) => GlobalStore.dispatchAction("Action.ToggleItemFavorite", iIndex);
 
 
-var app: App = <App
-  pages={
+var app: SplitApp = <SplitApp
+
+  masterPages={
+    <Page
+
+      customHeader={
+        <OverflowToolbar>
+          <Icon src="sap-icon://favorite-list" />
+          <Title>Catalogs</Title>
+        </OverflowToolbar>
+      }
+
+
+
+    >
+      <SelectList
+        selectedKey="all"
+        items={[
+          <ListItem key="all" icon="sap-icon://list">All</ListItem>
+        ]}
+      />
+    </Page>
+  }
+  detailPages={
     <Page
       customHeader={
         <OverflowToolbar>
-          <Button icon="sap-icon://sap-ui5" enabled={false} type={ButtonType.Transparent} />
-          <Title >UI5 To Do List Application</Title>
+          <Icon src="sap-icon://task" />
+          <Title>To Do List</Title>
           <ToolbarSpacer />
           <CheckBox
             text="Show Finished"
@@ -67,7 +93,7 @@ var app: App = <App
       // for chinese input, it will cause some errors.
       footer={
         <Toolbar>
-          <Input placeholder="Add To Do" value="{/NewToDoValue}" submit={actionAddNewToDo} valueLiveUpdate={true} />
+          <Input placeholder="Add New To Do" value="{/NewToDoValue}" submit={actionAddNewToDo} valueLiveUpdate={true} />
           <Button text="Add" enabled="{= ${/NewToDoValue}.length > 0}" type={ButtonType.Transparent} press={actionAddNewToDo} />
         </Toolbar>
       }
