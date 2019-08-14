@@ -82,7 +82,7 @@ export default class ReduxModel<T> extends ClientModel {
       composeEnhancer(applyMiddleware(ReduxThunk))
     );
 
-    persistStore(this._store);
+    this._persister = persistStore(this._store);
 
     this._store.subscribe(() => {
       // once any data updated, perform check
@@ -149,7 +149,7 @@ export default class ReduxModel<T> extends ClientModel {
   }
 
   setProperty(sPath, oValue, oContext, bAsyncUpdate) {
-    this.dispatch({ type: CONST_SET_PROPERTY, param: { sPath, oValue, oContext } });
+    this.dispatchAction(CONST_SET_PROPERTY, { sPath, oValue, oContext });
     return true;
   }
 

@@ -13,6 +13,7 @@ const AppInitState = {
    */
   bShowFavorite: false,
   bShowFinished: true,
+  bSideExpand: false,
   /**
    * to-do tasks list
    */
