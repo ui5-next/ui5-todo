@@ -21,6 +21,7 @@ import NavigationList from "sap/tnt/NavigationList";
 import NavigationListItem from "sap/tnt/NavigationListItem";
 import App from "sap/m/App";
 import ToolHeader from "sap/tnt/ToolHeader";
+import "./index.css";
 
 GlobalStore.addReducer("Action.AddNewToDo", oState => {
   // add state to value
@@ -78,7 +79,7 @@ var app = <App
       header={
         <ToolHeader>
           <Button press={actionToggleSideExpand} icon="sap-icon://menu" type={ButtonType.Transparent} />
-          <Title>UI5 To Do List Application</Title>
+          <Title class="appTitle">UI5 To Do List Application</Title>
           <ToolbarSpacer />
           <MenuButton
             type={ButtonType.Transparent}
@@ -133,19 +134,21 @@ var app = <App
                 items={{
                   path: "/ToDoList",
                   template: (
-                    <CustomListItem visible={{
-                      parts: [{ path: "bFavorite" }, { path: "bFinished" }, { path: "/bShowFavorite" }, { path: "/bShowFinished" }],
-                      formatter: (bFavorite, bFinished, bShowFavorite, bShowFinished) => {
-                        // real complex logic
-                        if (!bShowFinished && bFinished) {
-                          return false;
+                    <CustomListItem
+                      visible={{
+                        parts: [{ path: "bFavorite" }, { path: "bFinished" }, { path: "/bShowFavorite" }, { path: "/bShowFinished" }],
+                        formatter: (bFavorite, bFinished, bShowFavorite, bShowFinished) => {
+                          // real complex logic
+                          if (!bShowFinished && bFinished) {
+                            return false;
+                          }
+                          if (bShowFavorite && !bFavorite) {
+                            return false;
+                          }
+                          return true;
                         }
-                        if (bShowFavorite && !bFavorite) {
-                          return false;
-                        }
-                        return true;
-                      }
-                    }}>
+                      }}
+                    >
                       <HBox
                         justifyContent={FlexJustifyContent.SpaceBetween}
                         items={[

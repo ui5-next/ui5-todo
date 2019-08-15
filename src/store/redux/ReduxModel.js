@@ -7,6 +7,7 @@ import ReduxTreeBinding from "./ReduxTreeBinding";
 import ReduxThunk from "redux-thunk";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import cloneDeep from "lodash/cloneDeep";
 
 import { get } from "./Util";
 
@@ -70,7 +71,7 @@ export default class ReduxModel<T> extends ClientModel {
         (oState = initState, oActionData: ActionData) => {
           const reducer = this.reducers[oActionData.type];
           if (reducer) {
-            var tmpState = { ...oState };
+            const tmpState = cloneDeep(oState);
             return reducer.perform(tmpState, oActionData.param) || tmpState;
           } else {
             return oState;

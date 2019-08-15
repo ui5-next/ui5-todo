@@ -1,0 +1,5 @@
+
+/* when input disabled, add deleted line */
+input[disabled="disabled"] {
+  text-decoration: line-through
+}
