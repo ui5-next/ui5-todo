@@ -147,6 +147,8 @@ export default class ReduxModel<T> extends ClientModel {
       throw new Error(`reducer for action ${type} has been registered`);
     }
 
+    return (oParam) => this.dispatchAction(type, oParam);
+
   }
 
   setProperty(sPath, oValue, oContext, bAsyncUpdate) {

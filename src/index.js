@@ -23,7 +23,7 @@ import App from "sap/m/App";
 import ToolHeader from "sap/tnt/ToolHeader";
 import "./index.css";
 
-GlobalStore.addReducer("Action.AddNewToDo", oState => {
+const actionAddNewToDo = GlobalStore.addReducer("Action.AddNewToDo", oState => {
   // add state to value
   oState.ToDoList = oState.ToDoList.concat({
     sText: oState.NewToDoValue,
@@ -35,7 +35,7 @@ GlobalStore.addReducer("Action.AddNewToDo", oState => {
   return oState;
 });
 
-GlobalStore.addReducer("Action.ToggleItemFavorite", (oState, oParam) => {
+const actionToggleItemFavorite = GlobalStore.addReducer("Action.ToggleItemFavorite", (oState, oParam) => {
   const oToDo = oState.ToDoList[oParam];
   if (oToDo) {
     oToDo.bFavorite = !oToDo.bFavorite;
@@ -43,32 +43,20 @@ GlobalStore.addReducer("Action.ToggleItemFavorite", (oState, oParam) => {
   return oState;
 });
 
-GlobalStore.addReducer("Action.ToggleOnlyFavorite", oState => {
+const actionToggleOnlyFavorite = GlobalStore.addReducer("Action.ToggleOnlyFavorite", oState => {
   oState.bShowFavorite = !oState.bShowFavorite;
   return oState;
 });
 
-GlobalStore.addReducer("Action.ToggleShowFinished", oState => {
+const actionToggleShowFinished = GlobalStore.addReducer("Action.ToggleShowFinished", oState => {
   oState.bShowFinished = !oState.bShowFinished;
   return oState;
 });
 
-GlobalStore.addReducer("Action.ToggleSideExpand", oState => {
+const actionToggleSideExpand = GlobalStore.addReducer("Action.ToggleSideExpand", oState => {
   oState.bSideExpand = !oState.bSideExpand;
   return oState;
 });
-
-
-const actionAddNewToDo = () => GlobalStore.dispatchAction("Action.AddNewToDo");
-
-const actionToggleItemFavorite = (iIndex) => GlobalStore.dispatchAction("Action.ToggleItemFavorite", iIndex);
-
-const actionToggleOnlyFavorite = () => GlobalStore.dispatchAction("Action.ToggleOnlyFavorite");
-
-const actionToggleShowFinished = () => GlobalStore.dispatchAction("Action.ToggleShowFinished");
-
-const actionToggleSideExpand = () => GlobalStore.dispatchAction("Action.ToggleSideExpand");
-
 
 var app = <App
   pages={
