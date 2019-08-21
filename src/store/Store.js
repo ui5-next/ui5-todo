@@ -14,6 +14,17 @@ const AppInitState = {
   bShowFavorite: false,
   bShowFinished: true,
   bSideExpand: false,
+
+  bDialogVisible: false,
+  sNewListName: "",
+  sSelectedList: "__ALL__",
+  aListCategories: [
+    {
+      sKey: "__ALL__",
+      sName: "All"
+    }
+  ],
+
   /**
    * to-do tasks list
    */
@@ -21,11 +32,13 @@ const AppInitState = {
     {
       sText: "Cooking",
       bFinished: true,
+      sList: "",
       bFavorite: false
     },
     {
       sText: "Read 42",
       bFinished: false,
+      sList: "",
       bFavorite: true
     }
   ]

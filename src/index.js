@@ -22,12 +22,16 @@ import NavigationListItem from "sap/tnt/NavigationListItem";
 import App from "sap/m/App";
 import ToolHeader from "sap/tnt/ToolHeader";
 import "./index.css";
+import Dialog from "sap/m/Dialog";
+import CustomData from "sap/ui/core/CustomData";
+import Core from "sap/ui/core/Core";
 
 const actionAddNewToDo = GlobalStore.addReducer("Action.AddNewToDo", oState => {
   // add state to value
   oState.ToDoList = oState.ToDoList.concat({
     sText: oState.NewToDoValue,
     bFinished: false,
+    sList: oState.sSelectedList,
     bFavorite: false
   });
   // clean
@@ -58,7 +62,57 @@ const actionToggleSideExpand = GlobalStore.addReducer("Action.ToggleSideExpand",
   return oState;
 });
 
+
+const actionAddNewList = GlobalStore.addReducer("Action.AddNewList", oState => {
+  oState.aListCategories.push({
+    sKey: oState.sNewListName,
+    sName: oState.sNewListName
+  });
+  oState.bDialogVisible = false;
+  oState.sNewListName = "";
+  return oState;
+});
+
+const actionSetDialogVisible = GlobalStore.addReducer("Action.SetDialogVisible", (oState, oParam) => {
+  oState.bDialogVisible = oParam;
+  return oState;
+});
+
+var newListDialog: Dialog = <Dialog
+  title="Add a new list"
+  customData={
+    // magic data register here.
+    <CustomData
+      key="visible"
+      value={{
+        path: "/bDialogVisible",
+        formatter: (v) => {
+          if (v) {
+            if (!Core.isInitialized()) {
+              actionSetDialogVisible(false);
+            } else if (!newListDialog.isOpen()) {
+              newListDialog.open();
+            }
+          } else if (newListDialog.isOpen()) {
+            newListDialog.close();
+          }
+        }
+      }}
+    />
+  }
+  buttons={[
+    <Button text="Add" press={actionAddNewList} />,
+    <Button text="Cancel" press={() => { actionSetDialogVisible(false); }} />
+  ]}
+>
+  <Input placeholder="Input a new list name" value="{/sNewListName}" submit={actionAddNewList} />
+</Dialog>;
+
+
 var app = <App
+
+  dependents={[newListDialog]}
+
   pages={
     <ToolPage
 
@@ -67,7 +121,7 @@ var app = <App
       header={
         <ToolHeader>
           <Button press={actionToggleSideExpand} icon="sap-icon://menu" type={ButtonType.Transparent} />
-          <Title class="appTitle">UI5 To Do List Application</Title>
+          <Title class="appTitle" text="UI5 To Do List Application" />
           <ToolbarSpacer />
           <MenuButton
             type={ButtonType.Transparent}
@@ -85,18 +139,24 @@ var app = <App
 
       sideContent={
         <SideNavigation
-          selectedKey="all"
           item={
             <NavigationList
-              items={[
-                <NavigationListItem icon="sap-icon://list" key="all">All</NavigationListItem>
-              ]}
+              selectedKey="{/sSelectedList}"
+              items={{
+                path: "/aListCategories",
+                template: <NavigationListItem icon="sap-icon://list" key="{sKey}" text="{sName}" />
+              }}
             />
           }
           footer={
             <NavigationList
               items={[
-                <NavigationListItem icon="sap-icon://add" key="add">Add New List</NavigationListItem>
+                <NavigationListItem
+                  select={() => { actionSetDialogVisible(true); }}
+                  icon="sap-icon://add"
+                  key="add"
+                  text="Add New List"
+                />
               ]}
             />
           }
@@ -124,13 +184,23 @@ var app = <App
                   template: (
                     <CustomListItem
                       visible={{
-                        parts: [{ path: "bFavorite" }, { path: "bFinished" }, { path: "/bShowFavorite" }, { path: "/bShowFinished" }],
-                        formatter: (bFavorite, bFinished, bShowFavorite, bShowFinished) => {
+                        parts: [
+                          { path: "bFavorite" },
+                          { path: "bFinished" },
+                          { path: "/bShowFavorite" },
+                          { path: "/bShowFinished" },
+                          { path: "sList" },
+                          { path: "/sSelectedList" }
+                        ],
+                        formatter: (bFavorite, bFinished, bShowFavorite, bShowFinished, sList, sSelectedList) => {
                           // real complex logic
                           if (!bShowFinished && bFinished) {
                             return false;
                           }
                           if (bShowFavorite && !bFavorite) {
+                            return false;
+                          }
+                          if (sSelectedList != "__ALL__" && sList != sSelectedList) {
                             return false;
                           }
                           return true;
@@ -167,7 +237,7 @@ var app = <App
                   )
                 }}
               />
-            </Page>
+            </Page >
           }
         />
       }
