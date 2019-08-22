@@ -88,11 +88,7 @@ var newListDialog: Dialog = <Dialog
         path: "/bDialogVisible",
         formatter: (v) => {
           if (v) {
-            if (!Core.isInitialized()) {
-              actionSetDialogVisible(false);
-            } else if (!newListDialog.isOpen()) {
-              newListDialog.open();
-            }
+            newListDialog.open();
           } else if (newListDialog.isOpen()) {
             newListDialog.close();
           }
@@ -246,4 +242,10 @@ var app = <App
   }
 />;
 
-app.setModel(GlobalStore).placeAt("content");
+
+Core.attachInit(() => {
+  // after init, dom UIArea is available
+  app.setModel(GlobalStore).placeAt("content");
+
+});
+
