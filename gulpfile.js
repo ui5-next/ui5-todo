@@ -1,3 +1,4 @@
+var { existsSync } = require("fs")
 var gulp = require("gulp");
 var babel = require("gulp-babel");
 var sourcemaps = require("gulp-sourcemaps");
@@ -10,7 +11,13 @@ var filter = require("gulp-filter");
 var console = require("console");
 var eagerPreload = require("gulp-ui5-eager-preload");
 var ui5preload = eagerPreload.componentPreload;
-var additionalPreload = require("./ui5Preload");
+
+var additionalPreload = { additionalResources: [], additionalModules: [] };
+
+if (existsSync("./ui5Preload.json")) {
+  additionalPreload = require("./ui5Preload")
+}
+
 var { join } = require("path");
 
 var babelConfig = require("./.babelrc");
