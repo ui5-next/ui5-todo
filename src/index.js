@@ -21,10 +21,15 @@ import NavigationList from "sap/tnt/NavigationList";
 import NavigationListItem from "sap/tnt/NavigationListItem";
 import App from "sap/m/App";
 import ToolHeader from "sap/tnt/ToolHeader";
-import "./index.css";
 import Dialog from "sap/m/Dialog";
 import CustomData from "sap/ui/core/CustomData";
 import Core from "sap/ui/core/Core";
+
+import "./index.css";
+import DragDropInfo from "sap/ui/core/dnd/DragDropInfo";
+import DropEffect from "sap/ui/core/dnd/DropEffect";
+import DropPosition from "sap/ui/core/dnd/DropPosition";
+import Control from "sap/ui/core/Control";
 
 const actionAddNewToDo = GlobalStore.addReducer("Action.AddNewToDo", oState => {
   // add state to value
@@ -38,6 +43,27 @@ const actionAddNewToDo = GlobalStore.addReducer("Action.AddNewToDo", oState => {
   oState.NewToDoValue = "";
   return oState;
 });
+
+const moveArray = (arr = [], iFrom = 0, iEnd = 0) => {
+  if (iEnd >= arr.length) {
+    var k = iEnd - arr.length + 1;
+    while (k--) {
+      arr.push(undefined);
+    }
+  }
+  arr.splice(iEnd, 0, arr.splice(iFrom, 1)[0]);
+  return arr; // for testing
+};
+
+const actionMoveToDoSequence = GlobalStore.addReducer(
+  "Action.MoveToDoSequence",
+  (oState, { iFrom, iEnd, sPosition }) => {
+    let iTo = iEnd;
+    oState.ToDoList = moveArray(oState.ToDoList, iFrom, iTo);
+    return oState;
+  }
+);
+
 
 const actionToggleItemFavorite = GlobalStore.addReducer("Action.ToggleItemFavorite", (oState, oParam) => {
   const oToDo = oState.ToDoList[oParam];
@@ -124,8 +150,16 @@ var app = <App
             menu={
               <Menu
                 items={[
-                  <MenuItem press={actionToggleShowFinished} icon="{= ${/bShowFinished} ? 'sap-icon://accept' : 'sap-icon://decline'}">Show Finished</MenuItem>,
-                  <MenuItem press={actionToggleOnlyFavorite} icon="{= ${/bShowFavorite} ? 'sap-icon://accept' : 'sap-icon://decline'}">Only Favorite</MenuItem>
+                  <MenuItem
+                    press={actionToggleShowFinished}
+                    icon="{= ${/bShowFinished} ? 'sap-icon://accept' : 'sap-icon://decline'}"
+                    text="Show Finished"
+                  />,
+                  <MenuItem
+                    press={actionToggleOnlyFavorite}
+                    icon="{= ${/bShowFavorite} ? 'sap-icon://accept' : 'sap-icon://decline'}"
+                    text="Only Favorite"
+                  />
                 ]}
               />
             }
@@ -136,18 +170,28 @@ var app = <App
       sideContent={
         <SideNavigation
           item={
+
             <NavigationList
+
               selectedKey="{/sSelectedList}"
               items={{
                 path: "/aListCategories",
-                template: <NavigationListItem icon="sap-icon://list" key="{sKey}" text="{sName}" />
+                template: <NavigationListItem
+
+                  icon="sap-icon://list"
+                  key="{sKey}"
+                  text="{sName}"
+                />
               }}
             />
+
           }
           footer={
+
             <NavigationList
               items={[
                 <NavigationListItem
+
                   select={() => { actionSetDialogVisible(true); }}
                   icon="sap-icon://add"
                   key="add"
@@ -155,6 +199,7 @@ var app = <App
                 />
               ]}
             />
+
           }
         />
       }
@@ -168,13 +213,42 @@ var app = <App
               // for chinese input, it will cause some errors.
               footer={
                 <Toolbar>
-                  <Input placeholder="Add New To Do" value="{/NewToDoValue}" submit={actionAddNewToDo} valueLiveUpdate={true} />
-                  <Button text="Add" enabled="{= ${/NewToDoValue}.length > 0}" type={ButtonType.Transparent} press={actionAddNewToDo} />
+                  <Input
+                    placeholder="Add New To Do"
+                    value="{/NewToDoValue}"
+                    submit={actionAddNewToDo}
+                    valueLiveUpdate={true}
+                  />
+                  <Button
+                    text="Add"
+                    enabled="{= ${/NewToDoValue}.length > 0}"
+                    type={ButtonType.Transparent} press={actionAddNewToDo}
+                  />
                 </Toolbar>
               }
             >
               <List
                 noDataText="No thing to do."
+                dragDropConfig={<DragDropInfo
+                  sourceAggregation="items"
+                  targetAggregation="items"
+                  dropEffect={DropEffect.Move}
+                  dropPosition={DropPosition.Between}
+                  drop={(oEvent) => {
+                    const oParam = oEvent.getParameters();
+                    const dropPosition = oParam.dropPosition;
+                    const draggedControl: Control = oParam.draggedControl;
+                    const droppedControl: Control = oParam.droppedControl;
+
+                    const iFrom = parseInt(draggedControl.getBindingContext().getPath().split("/").pop(), 10);
+                    const iEnd = parseInt(droppedControl.getBindingContext().getPath().split("/").pop(), 10);
+
+                    if (iFrom != iEnd) {
+                      actionMoveToDoSequence({ iFrom, iEnd, sPosition: dropPosition });
+                    }
+
+                  }}
+                />}
                 items={{
                   path: "/ToDoList",
                   template: (
