@@ -1,4 +1,4 @@
-var { existsSync } = require("fs")
+var { existsSync } = require("fs");
 var gulp = require("gulp");
 var babel = require("gulp-babel");
 var sourcemaps = require("gulp-sourcemaps");
@@ -15,7 +15,7 @@ var ui5preload = eagerPreload.componentPreload;
 var additionalPreload = { additionalResources: [], additionalModules: [] };
 
 if (existsSync("./ui5Preload.json")) {
-  additionalPreload = require("./ui5Preload")
+  additionalPreload = require("./ui5Preload");
 }
 
 var { join } = require("path");
