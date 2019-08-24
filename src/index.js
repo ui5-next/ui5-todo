@@ -24,12 +24,14 @@ import ToolHeader from "sap/tnt/ToolHeader";
 import Dialog from "sap/m/Dialog";
 import CustomData from "sap/ui/core/CustomData";
 import Core from "sap/ui/core/Core";
-
-import "./index.css";
 import DragDropInfo from "sap/ui/core/dnd/DragDropInfo";
 import DropEffect from "sap/ui/core/dnd/DropEffect";
 import DropPosition from "sap/ui/core/dnd/DropPosition";
 import Control from "sap/ui/core/Control";
+
+
+import "./index.css";
+
 
 const actionAddNewToDo = GlobalStore.addReducer("Action.AddNewToDo", oState => {
   // add state to value
