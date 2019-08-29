@@ -111,7 +111,7 @@ var build = ({ preload = false, sourcemap = false, offline = false }) => {
 gulp.task("clean", () => del(DEST_ROOT));
 
 gulp.task("build:preload", () => {
-  return build({ preload: true, sourcemap: true, offline: false }).pipe(gulp.dest(DEST_ROOT));
+  return build({ preload: true, sourcemap: true, offline: true }).pipe(gulp.dest(DEST_ROOT));
 });
 
 gulp.task("build:debug", () => {
@@ -119,7 +119,7 @@ gulp.task("build:debug", () => {
 });
 
 gulp.task("build", () => {
-  return build({ preload: true, sourcemap: false, offline: false }).pipe(gulp.dest(DEST_ROOT));
+  return build({ preload: true, sourcemap: false, offline: true }).pipe(gulp.dest(DEST_ROOT));
 });
 
 gulp.task("bs", () => {
