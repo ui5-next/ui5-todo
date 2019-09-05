@@ -96,6 +96,8 @@ var build = ({ preload = false, sourcemap = false, offline = false }) => {
           "**/*.json",
           // remove offline files
           "!**/resources/**/*.*",
+          // not preload thirdparty js file
+          "!**/_thirdparty/**/*.js",
           // avoid preload file
           "!**/preload.js",
           // not use now
