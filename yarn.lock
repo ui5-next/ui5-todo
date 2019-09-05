@@ -2912,10 +2912,10 @@ gulp-sourcemaps@^2.6.0:
     strip-bom-string "1.X"
     through2 "2.X"
 
-gulp-ui5-eager-preload@^1.13.2:
-  version "1.13.2"
-  resolved "https://registry.yarnpkg.com/gulp-ui5-eager-preload/-/gulp-ui5-eager-preload-1.13.2.tgz#fb39b987db7f29f9158798a4ed4ad53df629eee6"
-  integrity sha512-M6iilzEINnAT8F97smI+1+rIQYWRCnpZxChDOXKtS6kMX6QTkkrzURVkKL5Km0RkU04/Q5OWbt5QsgDDTG3GHg==
+gulp-ui5-eager-preload@^1.13.3:
+  version "1.13.3"
+  resolved "https://registry.yarnpkg.com/gulp-ui5-eager-preload/-/gulp-ui5-eager-preload-1.13.3.tgz#ed319883fe3524a2bef618036424037c797cecb7"
+  integrity sha512-MuKjmnJ5C7bVk2C+nmY1AA/cazD0hjfO5R53ttOIseBbNVnIDw1aCQISBp/9FyqX6W31csQxZ5DSFXxqEc9Sgg==
   dependencies:
     ansi-colors "^3.2.4"
     deepdash "^1.9.5"
