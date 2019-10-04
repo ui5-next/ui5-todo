@@ -185,10 +185,10 @@
   resolved "https://registry.npm.taobao.org/@types/sizzle/download/@types/sizzle-2.3.2.tgz#a811b8c18e2babab7d542b3365887ae2e4d9de47"
   integrity sha1-qBG4wY4rq6t9VCszZYh64uTZ3kc=
 
-"@ui5-next/types@1.4.2":
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/@ui5-next/types/-/types-1.4.2.tgz#53a3ff11201d7094804c8d48028117d087ffccd8"
-  integrity sha512-czM+zwjosofxMv69vPzBzSNrmjIGVWiE71XXdAsLt1zhUIR0uLVKOHNy+TAWZpDQQiK0SKifwHnynOgZKNgAHw==
+"@ui5-next/types@1.4.3":
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/@ui5-next/types/-/types-1.4.3.tgz#75ff7f70babe04f79db7f45fab9041e15d8906e5"
+  integrity sha512-PVxZJOE7slEG4eOKs/PUbsvSmIDnJgLT5U4yIRCOhPu9LgYhue3cnbNQXufrIQjMCdbhyIXfy0fKLZyROHqHIw==
 
 abbrev@1:
   version "1.1.1"
