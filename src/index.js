@@ -176,12 +176,7 @@ var app = <App
               selectedKey="{/sSelectedList}"
               items={{
                 path: "/aListCategories",
-                template: <NavigationListItem
-
-                  icon="sap-icon://list"
-                  key="{sKey}"
-                  text="{sName}"
-                />
+                template: <NavigationListItem icon="sap-icon://list" key="{sKey}" text="{sName}" />
               }}
             />
 
@@ -191,7 +186,6 @@ var app = <App
             <NavigationList
               items={[
                 <NavigationListItem
-
                   select={() => { actionSetDialogVisible(true); }}
                   icon="sap-icon://add"
                   key="add"
