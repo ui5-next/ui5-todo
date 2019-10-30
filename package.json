@@ -2,7 +2,7 @@
   "app": {
     "name": "UI5 To Do List",
     "namespace": "ui5.todo",
-    "resource": "https://openui5.hana.ondemand.com/1.68.1/resources/"
+    "resource": "https://openui5.hana.ondemand.com/1.71.1/resources/"
   },
   "name": "ui5-todo",
   "version": "1.0.0",
@@ -19,6 +19,7 @@
   "dependencies": {
     "@openui5/sap.m": "^1.71.1",
     "@openui5/sap.ui.core": "^1.71.1",
+    "@openui5/sap.tnt": "^1.71.1",
     "lodash": "^4.17.15",
     "redux": "^4.0.4",
     "redux-persist": "^5.10.0",
@@ -31,7 +32,7 @@
     "@types/openui5": "^1.40.2",
     "@ui5-next/types": "latest",
     "babel-eslint": "^10",
-    "babel-preset-ui5-next": "^7.2.2",
+    "babel-preset-ui5-next": "^7.2.3",
     "browser-sync": "2.26.7",
     "del": "^5",
     "eslint": "^6",

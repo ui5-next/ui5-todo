@@ -181,11 +181,6 @@
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.6.4.tgz#cb9b36a7482110282d5cb6dd424ec9262b473d81"
   integrity sha512-D8RHPW5qd0Vbyo3qb+YjO5nvUVRTXFLQ/FsDxJU2Nqz4uB5EnUN0ZQSEYpvTIbRuttig1XbHWU5oMeQwQSAA+A==
 
-"@babel/plugin-check-constants@^7.0.0-beta.38":
-  version "7.0.0-beta.38"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-check-constants/-/plugin-check-constants-7.0.0-beta.38.tgz#bbda6306d45a4f097ccb416c0b52d6503f6502cf"
-  integrity sha512-MjdGn/2sMLu0fnNFbkILut0OsegzRTeCOJ/uGHH88TwTXPzxONx2cTVJ36i3cTQXHMiIOUT3hX6HqzWM99Q6vA==
-
 "@babel/plugin-proposal-decorators@^7.6.0":
   version "7.6.0"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-decorators/-/plugin-proposal-decorators-7.6.0.tgz#6659d2572a17d70abd68123e89a12a43d90aa30c"
@@ -486,7 +481,7 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@openui5/sap.m@^1.71.1":
+"@openui5/sap.m@1.71.1", "@openui5/sap.m@^1.71.1":
   version "1.71.1"
   resolved "https://registry.yarnpkg.com/@openui5/sap.m/-/sap.m-1.71.1.tgz#f319d847dc299487b6922dfb4374fee2db13c490"
   integrity sha512-g7K6FBLwDOuLk6GoqWmUIqLjMJOc5+8KNOVVWIEDT56UUYS18rD+CzbKUW/6YW2080vuJcyepBs4GdwOdxn5yg==
@@ -494,6 +489,14 @@
     "@openui5/sap.ui.core" "1.71.1"
     "@openui5/sap.ui.layout" "1.71.1"
     "@openui5/sap.ui.unified" "1.71.1"
+
+"@openui5/sap.tnt@^1.71.1":
+  version "1.71.1"
+  resolved "https://registry.yarnpkg.com/@openui5/sap.tnt/-/sap.tnt-1.71.1.tgz#25785505db56d9a7ff60cb980397edca38e5888c"
+  integrity sha512-EYkcB84sv39pQ0FhnCZdp3qXRQjZZtvwdgl6bAz9wMzPG/gCHVwDs+5T1gVHimsPzH5MoRuhZ/Tb2E+G0Mqtzw==
+  dependencies:
+    "@openui5/sap.m" "1.71.1"
+    "@openui5/sap.ui.core" "1.71.1"
 
 "@openui5/sap.ui.core@1.71.1", "@openui5/sap.ui.core@^1.71.1":
   version "1.71.1"
@@ -1023,13 +1026,12 @@ babel-plugin-ui5-next@^7.2.2:
   dependencies:
     lodash "^4.17.15"
 
-babel-preset-ui5-next@^7.2.2:
-  version "7.2.2"
-  resolved "https://registry.yarnpkg.com/babel-preset-ui5-next/-/babel-preset-ui5-next-7.2.2.tgz#c617475bf0aeb2c352363996da0cb945a0e6fdfb"
-  integrity sha512-pBpqhzL/QET2eLdw9lA33PCwcxvNrbMU7GBuPUJXfHCX2L4UxfhuADzSKgpAmzMYyOAiZlXLG693L0V7pbI/MA==
+babel-preset-ui5-next@^7.2.3:
+  version "7.2.3"
+  resolved "https://registry.yarnpkg.com/babel-preset-ui5-next/-/babel-preset-ui5-next-7.2.3.tgz#a4d44ff2ba8419ed66c3a8a88d5c4b2c74bb571b"
+  integrity sha512-G4sKPieHJabHvwci7eQ8YOTsRDotl/e/Iq+OY3uyCTma2f6hZyMk4aJ1XDhMp1O4CKJc2eA7mo+jGmaDn5HC6g==
   dependencies:
     "@babel/core" "^7.0.0"
-    "@babel/plugin-check-constants" "^7.0.0-beta.38"
     "@babel/plugin-proposal-decorators" "^7.6.0"
     "@babel/plugin-proposal-object-rest-spread" "^7.0.0"
     "@babel/plugin-syntax-class-properties" "^7.0.0"
