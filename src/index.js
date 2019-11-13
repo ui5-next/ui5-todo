@@ -315,5 +315,9 @@ Core.attachInit(() => {
   // after init, dom UIArea is available
   app.setModel(GlobalStore).placeAt("content");
 
+  if (window.loadingSpinner) {
+    window.loadingSpinner.stop();
+  }
+
 });
 
