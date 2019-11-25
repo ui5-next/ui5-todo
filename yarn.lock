@@ -2777,10 +2777,10 @@ gulp-sourcemaps@^2.6.0:
     strip-bom-string "1.X"
     through2 "2.X"
 
-gulp-ui5-eager-preload@^1.19.1:
-  version "1.19.1"
-  resolved "https://registry.yarnpkg.com/gulp-ui5-eager-preload/-/gulp-ui5-eager-preload-1.19.1.tgz#373897e5d25913ae2f5077a3289d6aa7bd353b15"
-  integrity sha512-i1TmzqmYTewV3dYL223IJIOBTffMweeLk7NdUYupvTipNLcAlScFzwqITxTdxEavVt2zZbzEUNxQYtZGEqoaaw==
+gulp-ui5-eager-preload@^1.19.2:
+  version "1.19.2"
+  resolved "https://registry.yarnpkg.com/gulp-ui5-eager-preload/-/gulp-ui5-eager-preload-1.19.2.tgz#dc80f2766dca045d0edf0ea8b5b22199db987f5d"
+  integrity sha512-bztp4eBo9rBs0pl+BQRcVhU/rKVboytAbNp40NkNFaooeFgugSO50Hu60lfa8PEVnVu5Ty/kRieQ1E+H2mFb6g==
   dependencies:
     "@babel/parser" "^7.6.3"
     "@babel/traverse" "^7.6.3"
