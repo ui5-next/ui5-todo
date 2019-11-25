@@ -1,0 +1,11 @@
+{
+	"sapUiFiori3AnchorBarBottomShadow": "inset 0 -0.0625rem #000",
+	"sapUiFiori3ABUnderlineOffsetAndHeight": "0.188rem",
+	"sapUiFiori3ABUnderlineTopRadius": "0.125rem",
+	"sapUiFiori3HSBottomShadow": "inset 0 -0.0625rem #000",
+	"sapUiFiori3HSTopShadow": "0 0.0625rem 0 0 #022f45",
+	"sapUiFiori3HSUnderlineOffsetAndHeight": "0.188rem",
+	"sapUiFiori3HSUnderlineTopRadius": "0.125rem",
+	"sapUiFiori3HSArrowDimensions": "2.375rem",
+	"sapUiFiori3AnchorBarTopShadow": "inset 0 0.0625rem #000"
+}

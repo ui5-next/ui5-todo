@@ -68,9 +68,10 @@ var copy = ({ preload = false, offline = false }) => {
     gulp.src("./package.json").pipe(
       eagerPreload({
         title: APP_NAME,
-        theme: "sap_fiori_3",
         bootScriptPath: "./index.js",
         ui5ResourceRoot: resourceRoot,
+        theme: "quartzdark",
+        ui5ThemeRoot: { quartzdark: "./theme/UI5" },
         preload,
         offline,
         withLoadingSpinner: true,

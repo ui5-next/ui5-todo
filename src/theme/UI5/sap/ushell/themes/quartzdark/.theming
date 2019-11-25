@@ -1,0 +1,15 @@
+{
+	"mVersionDependency": {
+		"UI5.sap/ushell.sap_fiori_3": "1.72.1",
+		"UI5.sap/ushell": "1.72.1",
+		"UI5": "1.72.1"
+	},
+	"sEntity": "Theme",
+	"sId": "quartzdark",
+	"sLabel": "Quartz Dark",
+	"oExtends": "UI5.sap/ushell.sap_fiori_3",
+	"sTextDirections": "LTR",
+	"sType": "STANDARD",
+	"sThemability": "PUBLIC",
+	"sReleaseStage": "GENERAL_AVAILABILITY"
+}

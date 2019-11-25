@@ -1,0 +1,47 @@
+{
+	"mVersionDependency": {
+		"Base.baseLib.sap_fiori_3": "11.1.15",
+		"Base.baseLib": "11.1.15",
+		"Base": "11.1.15"
+	},
+	"sEntity": "Theme",
+	"sId": "quartzdark",
+	"sLabel": "Quartz Dark",
+	"oExtends": "Base.baseLib.sap_fiori_3",
+	"aFiles": [
+		"base",
+		"preview",
+		"css_variables",
+		"custom"
+	],
+	"sTextDirections": "LTR",
+	"sType": "STANDARD",
+	"sThemability": "PUBLIC",
+	"mData": {
+		"mThemeMasterState": {
+			"mSourceInfo": {
+				"sCreated": "2019-11-25T05:18:08.383Z",
+				"sLastModified": "2019-11-25T05:19:57.225Z",
+				"aVersionHistory": [
+					{
+						"sDate": "2019-11-25T05:18:08.383Z",
+						"mVersion": {
+							"UI5": "1.72.1",
+							"Base": "11.1.15",
+							"UR": "10.30.7.318050.0"
+						}
+					}
+				]
+			},
+			"mBuildInfo": {
+				"sLastBuilt": "2019-11-25T05:20:07.498Z",
+				"mVersion": {
+					"UI5": "1.72.1",
+					"Base": "11.1.15",
+					"UR": "10.30.7.318050.0"
+				}
+			}
+		}
+	},
+	"sReleaseStage": "GENERAL_AVAILABILITY"
+}

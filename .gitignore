@@ -57,3 +57,5 @@ visual_ext_index.html
 /src/visual_ext_index.html
 /.user.project.json
 /dist/
+
+.DS_Store
