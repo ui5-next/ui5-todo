@@ -29,6 +29,7 @@ var DEST_ROOT = "./dist";
 var APP_NAME = packageJson.app.name;
 var namespace = packageJson.app.namespace;
 var resourceRoot = packageJson.app.resource;
+var OFFLINE = packageJson.app.offline;
 
 var buildJs = ({ sourcemap }) => {
   // use to avoid an error cause whole gulp failed
@@ -70,8 +71,7 @@ var copy = ({ preload = false, offline = false }) => {
         title: APP_NAME,
         bootScriptPath: "./index.js",
         ui5ResourceRoot: resourceRoot,
-        theme: "quartzdark",
-        ui5ThemeRoot: { quartzdark: "./theme/UI5" },
+        theme: "sap_fiori_3",
         preload,
         offline,
         withLoadingSpinner: true,
@@ -115,7 +115,7 @@ var build = ({ preload = false, sourcemap = false, offline = false }) => {
 gulp.task("clean", () => del(DEST_ROOT));
 
 gulp.task("build:preload", () => {
-  return build({ preload: true, sourcemap: true, offline: true }).pipe(gulp.dest(DEST_ROOT));
+  return build({ preload: true, sourcemap: true, offline: false }).pipe(gulp.dest(DEST_ROOT));
 });
 
 gulp.task("build:debug", () => {
@@ -123,7 +123,7 @@ gulp.task("build:debug", () => {
 });
 
 gulp.task("build", () => {
-  return build({ preload: true, sourcemap: false, offline: true }).pipe(gulp.dest(DEST_ROOT));
+  return build({ preload: true, sourcemap: false, offline: false }).pipe(gulp.dest(DEST_ROOT));
 });
 
 gulp.task("bs", () => {
