@@ -42,17 +42,17 @@ export default class ReduxModel<T> extends ClientModel {
    *
    * @param {any} initializeState The init state of application
    */
-  constructor(initializeState: T = {}) {
+  constructor(initializeState: T = {}, storeName = "GlobalState") {
 
     super();
 
     this.setSizeLimit(DEFAULT_MODEL_LIST_MAX_SIZE);
 
-    this._initStore(initializeState);
+    this._initStore(initializeState, storeName);
 
   }
 
-  _initStore(initState: T) {
+  _initStore(initState: T, storeName: String) {
 
     this.reducers = {
 
@@ -66,7 +66,7 @@ export default class ReduxModel<T> extends ClientModel {
     this._store = createStore(
       persistReducer(
         // config
-        { key: "GlobalState", storage },
+        { key: storeName, storage },
         // reducer
         (oState = initState, oActionData: ActionData) => {
           const reducer = this.reducers[oActionData.type];

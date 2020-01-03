@@ -44,4 +44,4 @@ const AppInitState = {
   ]
 };
 
-export const GlobalStore = new ReduxModel(AppInitState);
+export const GlobalStore = new ReduxModel(AppInitState, "UI5ToDoList");

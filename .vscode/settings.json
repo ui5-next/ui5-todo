@@ -18,5 +18,8 @@
         "sourcemap",
         "thirdparty",
         "unfavorite"
-    ]
+    ],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    }
 }
