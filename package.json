@@ -21,7 +21,7 @@
     "@openui5/sap.m": "^1.71.1",
     "@openui5/sap.ui.core": "^1.71.1",
     "@openui5/sap.tnt": "^1.71.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "redux": "^4.0.4",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0"
